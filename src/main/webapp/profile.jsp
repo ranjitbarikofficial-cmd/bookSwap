@@ -13,13 +13,18 @@
 <body>
 
 <%
-    User u=(User)request.getAttribute("User");
+    HttpSession hs=request.getSession();
+    User u=(User)hs.getAttribute("User");
 %>
 
 
 <h2><%=u.getName()%></h2>
 <p>Email:<%=u.getEmail()%></p>
 <p>Phone:<%=u.getPhone()%></p>
+
+<form action="editProfile.jsp" method="post">
+    <input type="submit" value="Edit Profile">
+</form>
 
 </body>
 </html>
