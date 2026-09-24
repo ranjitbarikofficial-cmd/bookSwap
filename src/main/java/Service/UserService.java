@@ -98,4 +98,19 @@ public class UserService {
         return null;
 
     }
+
+    public static User updateProfile(User u,String name,String phone){
+
+        User up=UserService.findByid(u);
+        if(up.getId()!=null){
+            up.setName(name);
+            up.setPhone(phone);
+            et.begin();
+            em.merge(up);
+            et.commit();
+            return up;
+        }else{
+            return null;
+        }
+    }
 }

@@ -29,6 +29,7 @@ public class LoginServlet extends HttpServlet {
             hs.setAttribute("email",u.getEmail());
             hs.setAttribute("role" ,u.getRole());
             hs.setAttribute("phone",u.getPhone());
+
         }else{
             resp.sendRedirect("login.jsp");
         }

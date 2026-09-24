@@ -24,7 +24,7 @@ public class ProfileServlet extends HttpServlet {
 
         User up= UserService.findByid(u);
         if(up!=null){
-            req.setAttribute("User",up);
+            hs.setAttribute("User",up);
             req.getRequestDispatcher("profile.jsp").forward(req,resp);
         }else{
             resp.sendRedirect("Login.jsp");
