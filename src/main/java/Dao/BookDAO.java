@@ -1,7 +1,8 @@
 package Dao;
 
-import com.bookswap.entity.Book;
-import com.bookswap.util.HibernateUtil;
+
+import Entity.Book;
+import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
