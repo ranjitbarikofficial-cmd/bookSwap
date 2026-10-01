@@ -32,6 +32,10 @@ public class Book {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne
+    @JoinColumn(name = "seller_id")
+    private Seller seller;
+
     public Book() {
     }
 
@@ -98,4 +102,11 @@ public class Book {
     public void setCategory(Category category) {
         this.category = category;
     }
+    public Seller getSeller() {
+        return seller;
+    }
+    public void setSeller(Seller seller) {
+        this.seller = seller;
+    }
+
 }

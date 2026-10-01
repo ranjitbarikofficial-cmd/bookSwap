@@ -1,16 +1,14 @@
 package Dao;
 
-
-import Entity.Book;
+import Entity.Seller;
 import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import java.util.List;
+public class SellerDAO {
 
-public class BookDAO {
 
-    public void saveBook(Book book) {
+    public void saveSeller(Seller seller) {
 
         Transaction transaction = null;
 
@@ -18,7 +16,7 @@ public class BookDAO {
 
             transaction = session.beginTransaction();
 
-            session.persist(book);
+            session.persist(seller);
 
             transaction.commit();
 
@@ -32,26 +30,12 @@ public class BookDAO {
         }
     }
 
-    public List<Book> getAllBooks() {
+
+    public Seller getSellerById(Long id) {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            return session
-                    .createQuery("FROM Book", Book.class)
-                    .getResultList();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            return List.of();
-        }
-    }
-
-    public Book getBookById(Long id) {
-
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-
-            return session.get(Book.class, id);
+            return session.get(Seller.class, id);
 
         } catch (Exception e) {
 
@@ -60,7 +44,8 @@ public class BookDAO {
         }
     }
 
-    public void updateBook(Book book) {
+
+    public void updateSeller(Seller seller) {
 
         Transaction transaction = null;
 
@@ -68,7 +53,7 @@ public class BookDAO {
 
             transaction = session.beginTransaction();
 
-            session.merge(book);
+            session.merge(seller);
 
             transaction.commit();
 
@@ -82,7 +67,8 @@ public class BookDAO {
         }
     }
 
-    public void deleteBook(Long id) {
+
+    public void deleteSeller(Long id) {
 
         Transaction transaction = null;
 
@@ -90,10 +76,10 @@ public class BookDAO {
 
             transaction = session.beginTransaction();
 
-            Book book = session.get(Book.class, id);
+            Seller seller = session.get(Seller.class, id);
 
-            if (book != null) {
-                session.remove(book);
+            if (seller != null) {
+                session.remove(seller);
             }
 
             transaction.commit();

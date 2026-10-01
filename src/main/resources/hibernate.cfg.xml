@@ -40,8 +40,10 @@
             update
         </property>
 
+
         <mapping class="Entity.Book"/>
         <mapping class="Entity.Category"/>
+        <mapping class="Entity.Seller"/>
 
     </session-factory>
 
