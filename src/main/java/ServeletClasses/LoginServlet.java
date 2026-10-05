@@ -29,9 +29,11 @@ public class LoginServlet extends HttpServlet {
             hs.setAttribute("email",u.getEmail());
             hs.setAttribute("role" ,u.getRole());
             hs.setAttribute("phone",u.getPhone());
+            hs.setAttribute("createdat",u.getCreatedAt());
+            hs.setAttribute("status",u.getStatus());
 
         }else{
-            resp.sendRedirect("login.jsp");
+            resp.sendRedirect("Login.jsp");
         }
     }
 }

@@ -1,22 +1,248 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Rahul Baliarsingh
-  Date: 23-09-2026
-  Time: 21:37
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | BookSwap</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;800&display=swap');
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+            color: #fff;
+            background: #0f172a;
+        }
+
+        /* ---------- Left brand panel ---------- */
+        .brand {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px clamp(32px, 6vw, 90px);
+            background:
+                    radial-gradient(circle at 20% 15%, rgba(255, 176, 92, 0.45), transparent 45%),
+                    radial-gradient(circle at 90% 90%, rgba(99, 102, 241, 0.55), transparent 50%),
+                    linear-gradient(135deg, #1e1b4b, #312e81);
+        }
+        /* soft decorative circles */
+        .brand::before, .brand::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.12);
+        }
+        .brand::before { width: 420px; height: 420px; right: -140px; top: -120px; }
+        .brand::after  { width: 300px; height: 300px; left: -100px; bottom: -90px; }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            font-size: 1.4rem;
+            font-weight: 800;
+        }
+        .logo span {
+            display: grid;
+            place-items: center;
+            width: 38px; height: 38px;
+            border-radius: 10px;
+            color: #1e1b4b;
+            background: linear-gradient(135deg, #ffd08a, #ffb054);
+            font-size: 1.1rem;
+        }
+
+        .brand h1 {
+            margin: 0 0 16px;
+            max-width: 460px;
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+        }
+        .brand h1 em {
+            font-style: normal;
+            background: linear-gradient(90deg, #ffd08a, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .brand p {
+            max-width: 420px;
+            margin: 0 0 36px;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .points { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+        .points li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.88);
+        }
+        .points li::before {
+            content: "✓";
+            display: grid;
+            place-items: center;
+            flex: none;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #1e1b4b;
+            background: #ffd08a;
+        }
+
+        /* ---------- Right form panel ---------- */
+        .panel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            background:
+                    radial-gradient(circle at 80% 10%, rgba(99, 102, 241, 0.2), transparent 40%),
+                    #0f172a;
+        }
+
+        form {
+            width: 100%;
+            max-width: 380px;
+            animation: rise 0.7s ease both;
+        }
+        form h2 {
+            margin: 0 0 6px;
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+        .sub { margin: 0 0 30px; color: rgba(255, 255, 255, 0.6); font-size: 0.95rem; }
+
+        label {
+            display: block;
+            margin: 0 0 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .field { margin-bottom: 20px; }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 14px 16px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1.5px solid rgba(255, 255, 255, 0.16);
+            border-radius: 12px;
+            outline: none;
+            transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
+        }
+        input::placeholder { color: rgba(255, 255, 255, 0.4); }
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: #ffb054;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 4px rgba(255, 176, 84, 0.18);
+        }
+        input:-webkit-autofill {
+            -webkit-text-fill-color: #fff;
+            box-shadow: 0 0 0 100px #1f2350 inset;
+            transition: background-color 9999s ease-in-out 0s;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            margin-top: 6px;
+            padding: 14px;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e1b4b;
+            background: linear-gradient(135deg, #ffd08a, #ffb054);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 176, 84, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 34px rgba(255, 176, 84, 0.45);
+        }
+        input[type="submit"]:active { transform: translateY(0); }
+
+        .switch {
+            margin: 26px 0 0;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .switch a { color: #ffd08a; font-weight: 600; text-decoration: none; }
+        .switch a:hover { text-decoration: underline; }
+
+        input:focus-visible, a:focus-visible { outline: 3px solid #a5b4fc; outline-offset: 3px; }
+
+        @keyframes rise {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+        }
+
+        /* ---------- Mobile ---------- */
+        @media (max-width: 860px) {
+            body { grid-template-columns: 1fr; }
+            .brand { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-<form action="login" method="post">
-    <input type="text" name="email" placeholder="Email Address">
-    <input type="password" name="password" placeholder="Password">
-    <input type="submit">
-</form>
+<section class="brand">
+    <div class="logo"><span>B</span> BookSwap</div>
+    <h1>Swap the books you've read for your <em>next great read.</em></h1>
+    <p>Join a community of readers who trade instead of buy. Free, simple, and good for your shelf.</p>
+    <ul class="points">
+        <li>List your books in under a minute</li>
+        <li>Find readers who want what you have</li>
+        <li>Swap safely with people near you</li>
+    </ul>
+</section>
+
+<section class="panel">
+    <form action="login" method="post">
+        <h2>Welcome back</h2>
+        <p class="sub">Log in to continue swapping.</p>
+
+        <div class="field">
+            <label for="email">Email address</label>
+            <input type="text" id="email" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password">
+        </div>
+
+        <input type="submit" value="Log in">
+
+        <p class="switch">New here? <a href="register.jsp">Create an account</a></p>
+    </form>
+</section>
 
 </body>
 </html>
