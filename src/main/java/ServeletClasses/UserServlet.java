@@ -22,13 +22,27 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
         String phone = req.getParameter("phone");
 
+        if (name == null || name.trim().isEmpty()
+                || email == null || email.trim().isEmpty()
+                || password == null || password.isEmpty()
+                || phone == null || phone.trim().isEmpty()) {
+
+            resp.sendRedirect("register.jsp?error=empty");
+            return;
+        }
+
         User u=new User();
         u.setName(name);
         u.setEmail(email);
+
         u.setPassword(password);
         u.setPhone(phone);
         u.setRole(Role.USER);
         u.setStatus(Status.ACTIVE);
+        if(UserService.emailExists(u.getEmail())){
+            resp.sendRedirect("register.jsp");
+            return;
+        }
 
         if (UserService.addUser(u)) {
             resp.sendRedirect("Login.jsp");

@@ -113,4 +113,32 @@ public class UserService {
             return null;
         }
     }
+
+    public static boolean updatepassword(User u,String password){
+        User up=UserService.findByid(u);
+        if(up.getId()!=null){
+            up.setPassword(password);
+            et.begin();
+            em.merge(u);
+            et.commit();
+            return true;
+        }
+        return false;
+
+    }
+
+    public static boolean emailExists(String email) {
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT id FROM users WHERE email = ?");
+
+            ps.setString(1, email);
+
+            ResultSet rs = ps.executeQuery();
+
+            return rs.next();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
