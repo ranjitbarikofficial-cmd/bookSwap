@@ -3,12 +3,10 @@ package Service;
 import Entity.Role;
 import Entity.Status;
 import Entity.User;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.*;
 
 import java.sql.*;
+import java.util.List;
 
 public class UserService {
     private static  Connection con=null;
@@ -140,5 +138,12 @@ public class UserService {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<User> getAlluser(){
+        Query query=em.createQuery("select u from User u where u.role=:role");
+        query.setParameter("role",Role.USER);
+        return query.getResultList();
+
     }
 }

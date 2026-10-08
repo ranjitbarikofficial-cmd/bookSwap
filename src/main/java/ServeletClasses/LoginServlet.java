@@ -1,5 +1,6 @@
 package ServeletClasses;
 
+import Entity.Role;
 import Entity.User;
 import Service.UserService;
 import jakarta.servlet.ServletException;
@@ -19,20 +20,25 @@ public class LoginServlet extends HttpServlet {
         String password=req.getParameter("password");
 
         User u= UserService.verify(email,password);
-        if(u!=null){
+        if (u != null) {
 
-            resp.sendRedirect("dashboard.jsp");
+            HttpSession hs = req.getSession();
 
-            HttpSession hs=req.getSession();
-            hs.setAttribute("id",u.getId());
-            hs.setAttribute("name",u.getName());
-            hs.setAttribute("email",u.getEmail());
-            hs.setAttribute("role" ,u.getRole());
-            hs.setAttribute("phone",u.getPhone());
-            hs.setAttribute("createdat",u.getCreatedAt());
-            hs.setAttribute("status",u.getStatus());
+            hs.setAttribute("id", u.getId());
+            hs.setAttribute("name", u.getName());
+            hs.setAttribute("email", u.getEmail());
+            hs.setAttribute("role", u.getRole());
+            hs.setAttribute("phone", u.getPhone());
+            hs.setAttribute("createdate", u.getCreatedAt());
+            hs.setAttribute("status", u.getStatus());
 
-        }else{
+            if (u.getRole() == Role.ADMIN) {
+                resp.sendRedirect("admindashboard.jsp");
+            } else {
+                resp.sendRedirect("dashboard.jsp");
+            }
+
+        } else {
             resp.sendRedirect("Login.jsp");
         }
     }
