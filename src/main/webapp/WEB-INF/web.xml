@@ -8,6 +8,7 @@
 
   <display-name>BookSwap</display-name>
 
+  <!-- Existing seller dashboard -->
   <servlet>
     <servlet-name>SellerController</servlet-name>
     <servlet-class>Controller.SellerController</servlet-class>
@@ -16,6 +17,42 @@
   <servlet-mapping>
     <servlet-name>SellerController</servlet-name>
     <url-pattern>/seller/dashboard</url-pattern>
+  </servlet-mapping>
+
+  <!-- Book management -->
+  <servlet>
+    <servlet-name>BookController</servlet-name>
+    <servlet-class>Controller.BookController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/add</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/list</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/details</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/edit</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/delete</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>BookController</servlet-name>
+    <url-pattern>/books/my-books</url-pattern>
   </servlet-mapping>
 
 </web-app>

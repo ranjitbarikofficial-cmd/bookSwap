@@ -1,11 +1,13 @@
 package Controller;
 
+import Entity.Seller;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class SellerController extends HttpServlet {
 
@@ -17,4 +19,5 @@ public class SellerController extends HttpServlet {
         request.getRequestDispatcher("/Seller/seller-dashboard.jsp")
                 .forward(request, response);
     }
+
 }

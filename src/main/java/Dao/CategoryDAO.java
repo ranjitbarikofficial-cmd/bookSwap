@@ -23,11 +23,15 @@ public class CategoryDAO {
 
         } catch (Exception e) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transaction != null && transaction.isActive()) {
+                try {
+                    transaction.rollback();
+                } catch (Exception rollbackEx) {
+                    e.addSuppressed(rollbackEx);
+                }
             }
 
-            e.printStackTrace();
+            throw new RuntimeException("Failed to save category.", e);
         }
     }
 
@@ -36,26 +40,25 @@ public class CategoryDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             return session
-                    .createQuery("FROM Category", Category.class)
+                    .createQuery("FROM Category c ORDER BY c.name ASC", Category.class)
                     .getResultList();
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-            return List.of();
+            throw new RuntimeException("Failed to load categories.", e);
         }
     }
 
     public Category getCategoryById(Long id) {
+        if (id == null) {
+            return null;
+        }
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             return session.get(Category.class, id);
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException("Failed to load category with ID: " + id, e);
         }
     }
 }

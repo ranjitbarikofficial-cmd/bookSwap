@@ -90,19 +90,25 @@
         <div class="card">
             <h3>Add Book</h3>
             <p>List a new book for swapping.</p>
-            <a href="add-book.jsp">Add Book</a>
+            <a href="${pageContext.request.contextPath}/books/add">Add Book</a>
         </div>
 
         <div class="card">
             <h3>My Books</h3>
             <p>View and manage your listed books.</p>
-            <a href="my-books.jsp">My Books</a>
+            <a href="${pageContext.request.contextPath}/books/my-books">My Books</a>
+        </div>
+
+        <div class="card">
+            <h3>Browse Books</h3>
+            <p>Search and filter all books available for swap.</p>
+            <a href="${pageContext.request.contextPath}/books/list">Browse Books</a>
         </div>
 
         <div class="card">
             <h3>Swap Requests</h3>
             <p>View requests from other users.</p>
-            <a href="swap-requests.jsp">Requests</a>
+            <a href="${pageContext.request.contextPath}/Seller/swap-requests.jsp">Requests</a>
         </div>
 
     </div>

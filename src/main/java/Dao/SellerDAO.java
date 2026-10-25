@@ -5,8 +5,9 @@ import Util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-public class SellerDAO {
+import java.util.List;
 
+public class SellerDAO {
 
     public void saveSeller(Seller seller) {
 
@@ -22,28 +23,62 @@ public class SellerDAO {
 
         } catch (Exception e) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transaction != null && transaction.isActive()) {
+                try {
+                    transaction.rollback();
+                } catch (Exception rollbackEx) {
+                    e.addSuppressed(rollbackEx);
+                }
             }
 
-            e.printStackTrace();
+            throw new RuntimeException("Failed to save seller.", e);
         }
     }
 
+    public List<Seller> getAllSellers() {
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            return session
+                    .createQuery("FROM Seller s ORDER BY s.name ASC", Seller.class)
+                    .getResultList();
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load sellers.", e);
+        }
+    }
 
     public Seller getSellerById(Long id) {
+        if (id == null) {
+            return null;
+        }
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             return session.get(Seller.class, id);
 
         } catch (Exception e) {
-
-            e.printStackTrace();
-            return null;
+            throw new RuntimeException("Failed to load seller with ID: " + id, e);
         }
     }
 
+    public Seller getSellerByEmail(String email) {
+        if (email == null || email.isBlank()) {
+            return null;
+        }
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+
+            return session
+                    .createQuery("FROM Seller s WHERE LOWER(s.email) = LOWER(:email)", Seller.class)
+                    .setParameter("email", email.trim())
+                    .uniqueResultOptional()
+                    .orElse(null);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load seller by email.", e);
+        }
+    }
 
     public void updateSeller(Seller seller) {
 
@@ -59,14 +94,17 @@ public class SellerDAO {
 
         } catch (Exception e) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transaction != null && transaction.isActive()) {
+                try {
+                    transaction.rollback();
+                } catch (Exception rollbackEx) {
+                    e.addSuppressed(rollbackEx);
+                }
             }
 
-            e.printStackTrace();
+            throw new RuntimeException("Failed to update seller.", e);
         }
     }
-
 
     public void deleteSeller(Long id) {
 
@@ -86,11 +124,15 @@ public class SellerDAO {
 
         } catch (Exception e) {
 
-            if (transaction != null) {
-                transaction.rollback();
+            if (transaction != null && transaction.isActive()) {
+                try {
+                    transaction.rollback();
+                } catch (Exception rollbackEx) {
+                    e.addSuppressed(rollbackEx);
+                }
             }
 
-            e.printStackTrace();
+            throw new RuntimeException("Failed to delete seller.", e);
         }
     }
 }

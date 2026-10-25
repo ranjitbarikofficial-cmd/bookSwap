@@ -3,6 +3,9 @@ package Service;
 import Dao.SellerDAO;
 import Entity.Seller;
 
+import java.util.List;
+import java.util.Optional;
+
 public class SellerService {
 
     private final SellerDAO sellerDAO;
@@ -15,8 +18,16 @@ public class SellerService {
         sellerDAO.saveSeller(seller);
     }
 
+    public List<Seller> getAllSellers() {
+        return sellerDAO.getAllSellers();
+    }
+
     public Seller getSellerById(Long id) {
         return sellerDAO.getSellerById(id);
+    }
+
+    public Seller getSellerByEmail(String email) {
+        return sellerDAO.getSellerByEmail(email);
     }
 
     public void updateSeller(Seller seller) {
@@ -26,4 +37,5 @@ public class SellerService {
     public void deleteSeller(Long id) {
         sellerDAO.deleteSeller(id);
     }
+
 }
