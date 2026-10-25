@@ -112,10 +112,10 @@ public class UserService {
         }
     }
 
-    public static boolean updatepassword(User u,String password){
-        User up=UserService.findByid(u);
-        if(up.getId()!=null){
-            up.setPassword(password);
+    public static boolean updatepassword(String email,String password){
+         User u=findByEmail(email);
+        if(u!=null){
+            u.setPassword(password);
             et.begin();
             em.merge(u);
             et.commit();
@@ -145,5 +145,55 @@ public class UserService {
         query.setParameter("role",Role.USER);
         return query.getResultList();
 
+    }
+
+    public static List<User> getAll(){
+        Query query=em.createQuery("select u from User u");
+        return query.getResultList();
+    }
+
+    public static boolean updateStatus(User u, Status status) {
+        if (u.getId() == null) {
+            return false;
+        }
+
+        try {
+            et.begin();
+
+            User user = em.find(User.class, u.getId());
+
+            if (user == null) {
+                et.rollback();
+                return false;
+            }
+
+            user.setStatus(status);
+            em.merge(user);
+
+            et.commit();
+            return true;
+
+        } catch (Exception e) {
+            if (et.isActive()) {
+                et.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        }
+
+
+
+    }
+
+    public static User findByEmail(String email){
+        try{
+            Query query=em.createQuery("select u from User u where u.email=:email");
+            query.setParameter("email",email);
+            return (User) query.getSingleResult();
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

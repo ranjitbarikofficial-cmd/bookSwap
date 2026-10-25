@@ -2,6 +2,7 @@ package ServeletClasses;
 
 
 import Entity.User;
+import Service.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,8 +16,12 @@ import java.io.IOException;
 public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession hs=req.getSession();
-       Long id=(Long) hs.getAttribute("id");
-        System.out.println(id);
+       String email=req.getParameter("email");
+       String password=req.getParameter("newpassword");
+       if(UserService.updatepassword(email,password)){
+           resp.sendRedirect("Login.jsp");
+       }else{
+           resp.sendRedirect("updatepassword.jsp");
+       }
     }
 }

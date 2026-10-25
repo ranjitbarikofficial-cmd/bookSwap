@@ -238,6 +238,13 @@
             <input type="password" id="password" name="password" placeholder="Enter your password">
         </div>
 
+
+        <div style="text-align: right; margin-top: -10px; margin-bottom: 20px;">
+            <a href="updatepassword.jsp" style="color: #ffd08a; font-size: 0.85rem; text-decoration: none;">
+                Forgot Password?
+            </a>
+        </div>
+
         <input type="submit" value="Log in">
 
         <p class="switch">New here? <a href="register.jsp">Create an account</a></p>
