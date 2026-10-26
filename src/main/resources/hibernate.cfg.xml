@@ -44,6 +44,8 @@
         <mapping class="Entity.Book"/>
         <mapping class="Entity.Category"/>
         <mapping class="Entity.Seller"/>
+        <mapping class="Entity.SwapRequest"/>
+        <mapping class="Entity.User"/>
 
     </session-factory>
 

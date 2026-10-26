@@ -46,9 +46,12 @@
     <h1>Welcome to BookSwap</h1>
     <p>Discover, list, and swap books with fellow readers.</p>
     <div class="links">
+        <a href="${pageContext.request.contextPath}/Login.jsp">Login</a>
+        <a href="${pageContext.request.contextPath}/register.jsp">Register</a>
         <a href="${pageContext.request.contextPath}/books/list">Browse Books</a>
         <a href="${pageContext.request.contextPath}/books/add">Add a Book</a>
         <a class="secondary" href="${pageContext.request.contextPath}/books/my-books">My Books</a>
+        <a class="secondary" href="${pageContext.request.contextPath}/swaps/requests">Swap Requests</a>
         <a class="secondary" href="${pageContext.request.contextPath}/seller/dashboard">Seller Dashboard</a>
     </div>
 </div>

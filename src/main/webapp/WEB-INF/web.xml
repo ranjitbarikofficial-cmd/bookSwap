@@ -55,4 +55,50 @@
     <url-pattern>/books/my-books</url-pattern>
   </servlet-mapping>
 
+  <!-- Swap Request management -->
+  <servlet>
+    <servlet-name>SwapRequestController</servlet-name>
+    <servlet-class>Controller.SwapRequestController</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/requests</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/sent</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/received</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/create</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/accept</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/reject</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/complete</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SwapRequestController</servlet-name>
+    <url-pattern>/swaps/history</url-pattern>
+  </servlet-mapping>
+
 </web-app>

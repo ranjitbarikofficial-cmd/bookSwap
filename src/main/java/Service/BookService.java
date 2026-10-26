@@ -24,7 +24,7 @@ public class BookService {
     );
 
     public static final Set<String> ALLOWED_STATUSES = Set.of(
-            "AVAILABLE", "PENDING", "SWAPPED", "UNAVAILABLE"
+            "AVAILABLE", "RESERVED", "PENDING", "SWAPPED", "UNAVAILABLE"
     );
 
     private final BookDAO bookDAO;
@@ -370,7 +370,7 @@ public class BookService {
         }
         String normalizedStatus = status.trim().toUpperCase();
         if (normalizedStatus.length() > MAX_STATUS_LENGTH || !ALLOWED_STATUSES.contains(normalizedStatus)) {
-            throw new IllegalArgumentException("Invalid book status. Allowed values: AVAILABLE, PENDING, SWAPPED, UNAVAILABLE.");
+            throw new IllegalArgumentException("Invalid book status. Allowed values: AVAILABLE, RESERVED, PENDING, SWAPPED, UNAVAILABLE.");
         }
     }
 

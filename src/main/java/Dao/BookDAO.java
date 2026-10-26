@@ -206,6 +206,26 @@ public class BookDAO {
                 return false;
             }
 
+            Long activeOrCompletedSwaps = session.createQuery(
+                            "SELECT COUNT(r.id) FROM SwapRequest r " +
+                            "WHERE (r.offeredBook.id = :bookId OR r.requestedBook.id = :bookId) " +
+                            "AND UPPER(r.status) IN ('PENDING', 'ACCEPTED', 'COMPLETED')",
+                            Long.class)
+                    .setParameter("bookId", id)
+                    .uniqueResult();
+
+            if (activeOrCompletedSwaps != null && activeOrCompletedSwaps > 0) {
+                throw new IllegalStateException(
+                        "Cannot delete this book because it is part of an active or completed swap request.");
+            }
+
+            session.createMutationQuery(
+                            "DELETE FROM SwapRequest r " +
+                            "WHERE (r.offeredBook.id = :bookId OR r.requestedBook.id = :bookId) " +
+                            "AND UPPER(r.status) = 'REJECTED'")
+                    .setParameter("bookId", id)
+                    .executeUpdate();
+
             session.remove(book);
 
             transaction.commit();
@@ -219,6 +239,10 @@ public class BookDAO {
                 } catch (Exception rollbackEx) {
                     e.addSuppressed(rollbackEx);
                 }
+            }
+
+            if (e instanceof IllegalStateException) {
+                throw (IllegalStateException) e;
             }
 
             throw new RuntimeException("Failed to delete book.", e);

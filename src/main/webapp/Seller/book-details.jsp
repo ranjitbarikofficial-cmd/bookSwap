@@ -126,6 +126,8 @@
         <a href="${pageContext.request.contextPath}/books/list">Browse Books</a>
         <a href="${pageContext.request.contextPath}/books/add">Add Book</a>
         <a href="${pageContext.request.contextPath}/books/my-books">My Books</a>
+        <a href="${pageContext.request.contextPath}/swaps/requests">Swap Requests</a>
+        <a href="${pageContext.request.contextPath}/swaps/history">Swap History</a>
     </div>
 </div>
 
@@ -198,6 +200,12 @@
 
                 <div class="action-bar">
                     <a class="btn btn-secondary" href="${pageContext.request.contextPath}/books/list">&larr; All Books</a>
+                    <c:if test="${not isOwner and book.status == 'AVAILABLE'}">
+                        <a class="btn btn-primary"
+                           href="${pageContext.request.contextPath}/swaps/requests?requestedBookId=${book.id}">
+                            Request Swap for This Book
+                        </a>
+                    </c:if>
                     <c:if test="${isOwner}">
                         <a class="btn btn-primary" href="${pageContext.request.contextPath}/books/edit?id=${book.id}">Edit Book</a>
                         <c:if test="${param.confirmDelete != 'true'}">

@@ -182,6 +182,8 @@
         <a href="${pageContext.request.contextPath}/books/list">Browse Books</a>
         <a href="${pageContext.request.contextPath}/books/add">Add Book</a>
         <a href="${pageContext.request.contextPath}/books/my-books">My Books</a>
+        <a href="${pageContext.request.contextPath}/swaps/requests">Swap Requests</a>
+        <a href="${pageContext.request.contextPath}/swaps/history">Swap History</a>
     </div>
 </div>
 
@@ -243,6 +245,7 @@
                     <select id="status" name="status">
                         <option value="">All Statuses</option>
                         <option value="AVAILABLE" <c:if test="${selectedStatus == 'AVAILABLE'}">selected</c:if>>Available</option>
+                        <option value="RESERVED" <c:if test="${selectedStatus == 'RESERVED'}">selected</c:if>>Reserved</option>
                         <option value="PENDING" <c:if test="${selectedStatus == 'PENDING'}">selected</c:if>>Pending</option>
                         <option value="SWAPPED" <c:if test="${selectedStatus == 'SWAPPED'}">selected</c:if>>Swapped</option>
                         <option value="UNAVAILABLE" <c:if test="${selectedStatus == 'UNAVAILABLE'}">selected</c:if>>Unavailable</option>
@@ -298,6 +301,9 @@
                         <td>
                             <div class="actions">
                                 <a href="${pageContext.request.contextPath}/books/details?id=${book.id}">Details</a>
+                                <c:if test="${not empty authenticatedSeller and book.seller != null and authenticatedSeller.id != book.seller.id and book.status == 'AVAILABLE'}">
+                                    <a href="${pageContext.request.contextPath}/swaps/requests?requestedBookId=${book.id}">Swap</a>
+                                </c:if>
                                 <c:if test="${empty authenticatedSeller or (book.seller != null and authenticatedSeller.id == book.seller.id)}">
                                     <a href="${pageContext.request.contextPath}/books/edit?id=${book.id}">Edit</a>
                                     <form method="post"

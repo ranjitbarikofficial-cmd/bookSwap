@@ -75,7 +75,10 @@
 <div class="navbar">
     <h2>BookSwap</h2>
 
-    <a href="#" class="logout">Logout</a>
+    <div style="display:flex; gap:12px; align-items:center;">
+        <a href="${pageContext.request.contextPath}/profile" style="color:white; text-decoration:none;">My Profile</a>
+        <a href="${pageContext.request.contextPath}/logout" class="logout">Logout</a>
+    </div>
 </div>
 
 <div class="container">
@@ -107,8 +110,14 @@
 
         <div class="card">
             <h3>Swap Requests</h3>
-            <p>View requests from other users.</p>
-            <a href="${pageContext.request.contextPath}/Seller/swap-requests.jsp">Requests</a>
+            <p>Send, accept, or reject book swap requests.</p>
+            <a href="${pageContext.request.contextPath}/swaps/requests">Requests</a>
+        </div>
+
+        <div class="card">
+            <h3>Swap History</h3>
+            <p>View accepted, completed, and rejected swaps.</p>
+            <a href="${pageContext.request.contextPath}/swaps/history">History</a>
         </div>
 
     </div>
