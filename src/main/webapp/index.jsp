@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+﻿<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -238,12 +238,14 @@
             <a class="link" href="#how">How it works</a>
             <a class="btn btn-glass" href="Login.jsp">Log in</a>
             <a class="btn btn-main" href="register.jsp">Register</a>
+            <a class="link" href="${pageContext.request.contextPath}/books/list">Browse Books</a>
+            <a class="link" href="${pageContext.request.contextPath}/books/my-books">My Books</a>
         </div>
     </nav>
 
     <header class="hero">
         <div>
-            <span class="tag">📚 A community for book lovers</span>
+            <span class="tag">≡ƒôÜ A community for book lovers</span>
             <h1>Swap the books you've read for <em>your next great read.</em></h1>
             <p>BookSwap lets readers trade books with each other. List what you have, find what you want, and keep the stories moving.</p>
             <div class="btns">
@@ -293,7 +295,7 @@
     </div>
 </div>
 
-<footer>© BookSwap. Made for readers.</footer>
+<footer>┬⌐ BookSwap. Made for readers.</footer>
 
 </body>
 </html>
