@@ -1,11 +1,18 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<!DOCTYPE html>
 <html>
 <head>
     <title>BookSwap Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: "Poppins", "Segoe UI", Arial, sans-serif;
@@ -23,7 +30,6 @@
             background: rgba(255, 255, 255, 0.04);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             color: white;
             padding: 20px 40px;
             display: flex;
@@ -208,13 +214,13 @@
 
 <header>
     <h2>BookSwap</h2>
-    <span>Welcome, <%=name%></span>
+    <span>Welcome, <%= name %></span>
 </header>
 
 <div class="container">
 
     <div class="welcome">
-        <h1>Welcome, <%=name%>!</h1>
+        <h1>Welcome, <%= name %>!</h1>
         <p>Find books, share your books, and exchange knowledge with other readers.</p>
     </div>
 
@@ -262,8 +268,8 @@
 
     <div class="section">
         <h2>My Account</h2>
-        <p>Logged in as: <strong><%=name%></strong></p>
-        <p>Role: <strong><%=role%></strong></p>
+        <p>Logged in as: <strong><%= name %></strong></p>
+        <p>Role: <strong><%= role %></strong></p>
 
         <div class="account-actions">
             <form action="profile" method="get">

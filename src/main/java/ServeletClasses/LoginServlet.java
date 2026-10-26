@@ -1,6 +1,8 @@
+
 package ServeletClasses;
 
 import Entity.Role;
+import Entity.Status;
 import Entity.User;
 import Service.UserService;
 import jakarta.servlet.ServletException;
@@ -14,13 +16,17 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String email=req.getParameter("email");
-        String password=req.getParameter("password");
 
-        User u= UserService.verify(email,password);
-        if (u != null) {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        User u = UserService.verify(email, password);
+
+        if (u != null && u.getStatus() == Status.ACTIVE) {
 
             HttpSession hs = req.getSession();
 
@@ -39,7 +45,7 @@ public class LoginServlet extends HttpServlet {
             }
 
         } else {
-            resp.sendRedirect("Login.jsp");
+            resp.sendRedirect("Login.jsp?error=invalid");
         }
     }
 }
