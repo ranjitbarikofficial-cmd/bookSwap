@@ -108,7 +108,7 @@
         <div class="card">
             <h3>Swap Requests</h3>
             <p>View requests from other users.</p>
-            <a href="${pageContext.request.contextPath}/Seller/swap-requests.jsp">Requests</a>
+            <a href="swap-requests.jsp">Requests</a>
         </div>
 
     </div>

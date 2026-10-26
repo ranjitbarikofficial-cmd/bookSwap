@@ -229,25 +229,26 @@
         <div class="feature-card">
             <h3>Browse Books</h3>
             <p>Explore books available from other users and find your next read.</p>
-            <a href="browseBooks.jsp">Browse Books</a>
+            <a href="Seller/book-list.jsp">Browse Books</a>
         </div>
 
         <div class="feature-card">
             <h3>Add My Book</h3>
             <p>List a book you own and make it available for exchange.</p>
-            <a href="addBook.jsp">Add My Book</a>
+            <a href="Seller/add-book.jsp">Add My Book</a>
         </div>
 
         <div class="feature-card">
             <h3>My Requests</h3>
-            <p>Check your book requests and see whether they are pending or matched.</p>
-            <a href="myRequests">View Requests</a>
+            <p>Check your book requests and see whether they are pending or matched.</p><a href="${pageContext.request.contextPath}/Seller/swap-history.jsp">View Requests</a>
+            <a href="Seller/swap-history.jsp">View Requests</a>
+
         </div>
 
         <div class="feature-card">
             <h3>My Exchanges</h3>
             <p>Track your matched books and the progress of your exchanges.</p>
-            <a href="myExchanges">View Exchanges</a>
+            <a href="Seller/swap-requests.jsp">View Exchanges</a>
         </div>
 
     </div>
